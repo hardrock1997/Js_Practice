@@ -190,3 +190,38 @@ function flattenHelper(input) {
     return toReturn
 }
 
+const articles = [
+{ title: "A", tags: ["js", "web"] },
+{ title: "B", tags: ["js", "backend"] },
+{ title: "C", tags: ["css", "web"] }
+];
+
+/*
+Output: { js: 2, web: 2, backend: 1, css: 1 }
+*/
+
+const tagFreq=articles.reduce(function(map,curr) {
+   const tags=curr.tags
+   for(const tag of tags) {
+       if(map.has(tag)) {
+           map.set(tag, map.get(tag)+1)
+       }
+       else {
+           map.set(tag,1)
+       }
+   }
+   return map
+},new Map())
+
+
+const freqObject = getFreqObj(tagFreq) 
+console.log(freqObject)
+    
+function getFreqObj(tagFreq) {
+    const toReturn={}
+    for(const [k,v] of tagFreq) {
+        toReturn[k]=v
+    }
+    return toReturn
+}
+
