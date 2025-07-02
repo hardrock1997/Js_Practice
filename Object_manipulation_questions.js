@@ -251,3 +251,38 @@ const grouped = logs.reduce((acc, log) => {
 
 console.log(grouped);
 
+
+
+const list = [
+{ id: 1, name: "Alice" },
+{ id: 2, age: 30 },
+{ id: 1, city: "New York" },
+{ id: 2, name: "Bob" }
+];
+
+/*
+Task:
+- Merge objects with same ID to get:
+[
+{ id: 1, name: "Alice", city: "New York" },
+{ id: 2, age: 30, name: "Bob" }
+]
+*/
+
+const updatedList = list.reduce(function(acc,curr) {
+    const {id, ...rest}=curr
+    if(!acc[id]) {
+        acc[id]=[]
+    }
+    acc[id].push(curr)
+    return acc
+},{})
+
+
+const merged = Object.entries(updatedList).map(([id, items]) => {
+  return items.reduce((acc, obj) => Object.assign(acc, obj), {});
+});
+
+console.log(merged);
+
+
