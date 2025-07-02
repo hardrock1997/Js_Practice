@@ -346,3 +346,63 @@ console.log(ans)
 
 
 
+const userData = [
+  { email: 'alice@example.com', name: 'Alice' },
+  { email: 'bob@example.com', age: 30 },
+  { email: 'alice@example.com', city: 'Wonderland' },
+  { email: 'bob@example.com', city: 'Seattle' }
+];
+/*
+Task:
+
+Merge user info by email into a single object per user.
+
+Output:
+[
+  { email: 'alice@example.com', name: 'Alice', city: 'Wonderland' },
+  { email: 'bob@example.com', age: 30, city: 'Seattle' }
+]
+*/
+
+const ans=userData.reduce(function(acc,curr){
+    const {email, ...rest}=curr
+    if(!acc[email]) {
+        acc[email]=rest
+    }
+    acc[email]={...acc[email],...rest}
+    return acc
+},{})
+console.log(ans)
+
+
+const leads = [
+  { leadId: 1, contact: { name: "Alice", phone: "123" }, status: "New" },
+  { leadId: 2, contact: { name: "Bob", phone: "456" }, status: "Qualified" }
+];
+/*
+Task:
+
+Flatten the contact object into the parent.
+
+Output:
+[
+  { leadId: 1, name: "Alice", phone: "123", status: "New" },
+  { leadId: 2, name: "Bob", phone: "456", status: "Qualified" }
+]
+*/
+
+const temp=leads.reduce(function(acc,curr){
+    const {contact,leadId,...rest}=curr
+    acc[leadId]={...contact,...leadId,...rest}
+    return acc
+},{})
+
+const res=Object.keys(temp).map((k)=>{
+    const v=temp[k]
+    return v
+})
+
+console.log(res)
+
+
+
