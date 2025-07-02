@@ -225,3 +225,29 @@ function getFreqObj(tagFreq) {
     return toReturn
 }
 
+const logs = [
+{ user: "alice", action: "login", time: 10 },
+{ user: "bob", action: "logout", time: 15 },
+{ user: "alice", action: "logout", time: 20 },
+];
+
+
+/*
+Task:
+- Group by user: {
+alice: [{ action: "login", time: 10 }, { action: "logout", time: 20 }],
+bob: [{ action: "logout", time: 15 }]
+}
+*/
+
+const grouped = logs.reduce((acc, log) => {
+  const { user, ...rest } = log; // destructure to drop `user`
+  if (!acc[user]) {
+    acc[user] = [];
+  }
+  acc[user].push(rest);
+  return acc;
+}, {});
+
+console.log(grouped);
+
