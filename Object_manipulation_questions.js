@@ -286,3 +286,63 @@ const merged = Object.entries(updatedList).map(([id, items]) => {
 console.log(merged);
 
 
+
+
+const events = [
+  { user: 'alice', action: 'click', value: 5 },
+  { user: 'bob', action: 'scroll', value: 10 },
+  { user: 'alice', action: 'click', value: 15 },
+  { user: 'bob', action: 'click', value: 20 },
+];
+
+/*Task:
+
+For each user, compute the total value of click actions.
+
+Output: { alice: 20, bob: 20 }
+*/
+
+
+const ans=events.reduce(function(acc,curr){
+    const {user,...rest}=curr
+    if(rest.action==='click') {
+        if(!acc[user]) {
+            acc[user]=0
+        }
+        acc[user]+=curr.value
+    }
+    return acc
+},{})
+
+
+console.log(ans)
+
+
+const inventory = [
+  { id: 1, category: 'Books', quantity: 20 },
+  { id: 2, category: 'Electronics', quantity: 5 },
+  { id: 3, category: 'Books', quantity: 10 },
+  { id: 4, category: 'Clothing', quantity: 15 }
+];
+/*
+Task:
+
+Compute total quantity per category.
+
+Output:
+{ Books: 30, Electronics: 5, Clothing: 15 }
+*/
+
+const ans=inventory.reduce(function(acc,curr){
+    const {category, quantity}=curr
+    if(!acc[category]) {
+        acc[category]=quantity
+    }
+    else acc[category]+=quantity
+    return acc
+},{})
+
+console.log(ans)
+
+
+
