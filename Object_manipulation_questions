@@ -142,3 +142,51 @@ function getAverageBySubjects(subjectsWithMarks) {
 
 const result=getAverageBySubjects(subjectsWithMarks)
 console.log(result)
+
+
+const input = {
+a: 1,
+    b: {
+        c: 2,
+        d: {
+            e: 3
+        }
+    }
+};
+/*
+Flatten Object to Key Paths:
+Output: { "a": 1, "b.c": 2, "b.d.e": 3 }
+*/
+
+
+const result=flattenHelper(input)
+console.log(result)
+
+function flattenHelper(input) {
+    if(Array.isArray(input)) {
+        return "Input is not an object"
+    }
+    if(!input) {
+        return "not a valid input"
+    }
+    const toReturn={}
+    const keys=Object.keys(input)
+    for(const k of keys) {
+        const val=input[k]
+        if(typeof val!=="object") {
+            toReturn[k]=val
+        }
+        else {
+           const obj=flattenHelper(val)
+           
+           for(const [key,value] of Object.entries(obj)) {
+               let customKey=""
+               customKey+=`${k}.${key}`
+               toReturn[customKey]=value
+           }
+            
+        }
+    }
+    return toReturn
+}
+
